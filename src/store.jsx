@@ -5,6 +5,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 
 import { signupReducer } from "./components/signup/SignupReducer";
 import { loginReducer } from "./components/login/LoginReducer";
+import { notesReducer } from "./components/notes/NotesReducer";
 
 const { createReduxHistory, routerMiddleware, routerReducer } =
 	createReduxHistoryContext({
@@ -17,7 +18,8 @@ export const store = configureStore({
 	reducer: combineReducers({
 		router: routerReducer,
 		createUser: signupReducer,
-		auth: loginReducer
+		auth: loginReducer,
+		notes: notesReducer
 	}),
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(middleware),
