@@ -1,27 +1,37 @@
 import React from "react";
-import { Route, Routes, Router } from "react-router-dom";
-import { Provider } from "react-redux";
-import { store, history } from "./store";
+// import axios from "axios";
 
+import { Route, Routes } from "react-router-dom";
+import {HistoryRouter as Router} from 'redux-first-history/rr6'
+
+import { history } from "./store";
+
+// Styling
+import { ToastContainer } from "react-toastify";
+
+// Pages
 import Home from "./components/Home";
 import Signup from "./components/signup/Signup";
 import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 
+// axios.defaults.baseURL = "http://127.0.0.1:8000";
+
 const App = () => {
 	return (
-		<div>
-			<Provider store={store}>
-				<Router history={history}>
-					<Routes>
-						<Route index path="/" element={Home} />
-						<Route path="/signup" element={Signup} />
-						<Route path="/login" element={Login} />
-						<Route path="/dashboard" element={Dashboard} />
-					</Routes>
-				</Router>
-			</Provider>
-		</div>
+		<Router history={history}>
+			<ToastContainer
+				hideProgressBar={true}
+				newestOnTop={true}
+				theme="colored"
+			/>
+			<Routes>
+				<Route exact path="/" element={<Home />} />
+				<Route path="/signup" element={<Signup />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/dashboard" element={<Dashboard />} />
+			</Routes>
+		</Router>
 	);
 };
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import {
 	Container,
 	Button,
@@ -11,8 +12,11 @@ import {
 	FormFeedback,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "../../utils/utils";
+import { signupNewUser } from "./SignupActions";
 
-const Signup = () => {
+const Signup = (props) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -21,7 +25,8 @@ const Signup = () => {
 			username: username,
 			password: password,
 		};
-		console.log("Sign up " + userData.username + " " + userData.password);
+		// console.log("Sign up " + userData.username + " " + userData.password);
+		props.signupNewUser(userData);
 	};
 
 	return (
@@ -33,28 +38,40 @@ const Signup = () => {
 						<FormGroup id="usernameId">
 							<Label>User Name</Label>
 							<Input
+								invalid={
+									props.createUser.usernameError
+										? true
+										: false
+								}
 								type="text"
 								name="username"
 								placeholder="Enter username"
 								value={username}
 								onChange={(e) => setUsername(e.target.value)}
 							/>
-							<FormFeedback invalid>
-								Oh noes! That username is already taken
+							<FormFeedback>
+								{/* Oh noes! That username is already taken */}
+								{props.createUser.usernameError}
 							</FormFeedback>
 						</FormGroup>
 
 						<FormGroup id="passwordId">
 							<Label>Password</Label>
 							<Input
+								invalid={
+									props.createUser.passwordError
+										? true
+										: false
+								}
 								type="password"
 								name="password"
 								placeholder="Enter password"
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 							/>
-							<FormFeedback invalid>
-								Oh noes! Inavlid password
+							<FormFeedback>
+								{/* Oh noes! Inavlid password */}
+								{props.createUser.passwordError}
 							</FormFeedback>
 						</FormGroup>
 					</Form>
@@ -70,4 +87,14 @@ const Signup = () => {
 	);
 };
 
-export default Signup;
+Signup.propTypes = {
+	signupNewUser: PropTypes.func.isRequired,
+	createUser: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+	createUser: state.createUser,
+});
+
+export default connect(mapStateToProps, {
+	signupNewUser,
+})(withRouter(Signup));

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { withRouter } from "../../utils/utils";
 import { Link } from "react-router-dom";
 import {
 	Container,
@@ -8,11 +10,14 @@ import {
 	Form,
 	FormGroup,
 	Input,
-	FormFeedback,
-    Label
+	Label,
 } from "reactstrap";
 
-const Login = () => {
+import { connect } from "react-redux";
+
+import { login } from "./LoginActions";
+
+const Login = (props) => {
 	const [password, setPassword] = useState("");
 	const [username, setUsername] = useState("");
 
@@ -21,7 +26,8 @@ const Login = () => {
 			username: username,
 			password: password,
 		};
-		console.log("Login " + userData.username + " " + userData.password);
+		// console.log("Login " + userData.username + " " + userData.password);
+		props.login(userData, "/dashboard");
 	};
 
 	return (
@@ -41,9 +47,6 @@ const Login = () => {
 									setUsername(e.target.value);
 								}}
 							/>
-							<FormFeedback invalid>
-								Oh noes! This username is taken
-							</FormFeedback>
 						</FormGroup>
 
 						<FormGroup>
@@ -57,7 +60,6 @@ const Login = () => {
 									setPassword(e.target.value);
 								}}
 							/>
-							<FormFeedback invalid>Oh noes!</FormFeedback>
 						</FormGroup>
 					</Form>
 					<Button color="primary" onClick={onLoginClick}>
@@ -71,4 +73,16 @@ const Login = () => {
 		</Container>
 	);
 };
-export default Login;
+
+Login.propTypes = {
+	login: PropTypes.func.isRequired,
+	auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+	auth: state.auth,
+});
+
+export default connect(mapStateToProps, {
+	login,
+})(withRouter(Login));
