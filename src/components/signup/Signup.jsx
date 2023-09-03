@@ -3,14 +3,11 @@ import PropTypes from "prop-types";
 import {
 	Container,
 	Button,
-	Row,
-	Col,
-	Form,
 	FormGroup,
-	Label,
+	FormLabel,
 	Input,
-	FormFeedback,
-} from "reactstrap";
+	Alert,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "../../utils/utils";
@@ -31,58 +28,46 @@ const Signup = (props) => {
 
 	return (
 		<Container>
-			<Row>
-				<Col md="4">
-					<h1>Signup</h1>
-					<Form>
-						<FormGroup id="usernameId">
-							<Label>User Name</Label>
-							<Input
-								invalid={
-									props.createUser.usernameError
-										? true
-										: false
-								}
-								type="text"
-								name="username"
-								placeholder="Enter username"
-								value={username}
-								onChange={(e) => setUsername(e.target.value)}
-							/>
-							<FormFeedback>
-								{/* Oh noes! That username is already taken */}
-								{props.createUser.usernameError}
-							</FormFeedback>
-						</FormGroup>
+			<h1>Signup</h1>
 
-						<FormGroup id="passwordId">
-							<Label>Password</Label>
-							<Input
-								invalid={
-									props.createUser.passwordError
-										? true
-										: false
-								}
-								type="password"
-								name="password"
-								placeholder="Enter password"
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-							/>
-							<FormFeedback>
-								{/* Oh noes! Inavlid password */}
-								{props.createUser.passwordError}
-							</FormFeedback>
-						</FormGroup>
-					</Form>
-					<Button color="primary" onClick={onSignupClick}>
-						Sign up
-					</Button>
-					<p className="mt-2">
-						Already have an account? <Link to="/login">Login</Link>
-					</p>
-				</Col>
-			</Row>
+			<FormGroup id="usernameId">
+				<FormLabel>User Name</FormLabel>
+				<Input
+					invalid={props.createUser.usernameError ? true : false}
+					type="text"
+					name="username"
+					placeholder="Enter username"
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+				/>
+				<Alert severity="error">
+					{/* Oh noes! That username is already taken */}
+					{props.createUser.usernameError}
+				</Alert>
+			</FormGroup>
+
+			<FormGroup id="passwordId">
+				<FormLabel>Password</FormLabel>
+				<Input
+					invalid={props.createUser.passwordError ? true : false}
+					type="password"
+					name="password"
+					placeholder="Enter password"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+				/>
+				<Alert severity="error">
+					{/* Oh noes! Inavlid password */}
+					{props.createUser.passwordError}
+				</Alert>
+			</FormGroup>
+
+			<Button color="primary" onClick={onSignupClick}>
+				Sign up
+			</Button>
+			<p className="mt-2">
+				Already have an account? <Link to="/login">Login</Link>
+			</p>
 		</Container>
 	);
 };

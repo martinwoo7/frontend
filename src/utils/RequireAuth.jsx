@@ -28,9 +28,9 @@ const requireAuth = (Component) => {
 
 	AuthenticatedComponent.propTypes = {
 		isAuthenticated: PropTypes.bool.isRequired,
-		// location: PropTypes.shape({
-		// 	pathname: PropTypes.string.isRequired,
-		// }).isRequired,
+		location: PropTypes.shape({
+			pathname: PropTypes.string.isRequired,
+		}).isRequired,
 		dispatch: PropTypes.func.isRequired,
 	};
 

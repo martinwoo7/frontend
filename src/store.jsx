@@ -7,6 +7,9 @@ import { signupReducer } from "./components/signup/SignupReducer";
 import { loginReducer } from "./components/login/LoginReducer";
 import { notesReducer } from "./components/notes/NotesReducer";
 
+// theme
+import themeSlice from "./themeSlice";
+
 const { createReduxHistory, routerMiddleware, routerReducer } =
 	createReduxHistoryContext({
 		history: createBrowserHistory(),
@@ -19,7 +22,8 @@ export const store = configureStore({
 		router: routerReducer,
 		createUser: signupReducer,
 		auth: loginReducer,
-		notes: notesReducer
+		notes: notesReducer,
+		theme: themeSlice,
 	}),
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(middleware),

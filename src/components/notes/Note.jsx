@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "../../utils/utils";
 import { deleteNote, updateNote } from "./NotesActions";
-import { Button } from "reactstrap";
+import { Button } from "@mui/material";
 
 const Note = (props) => {
 	const { note } = props;

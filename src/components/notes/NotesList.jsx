@@ -9,7 +9,7 @@ import Note from "./Note";
 const NotesList = (props) => {
 	useEffect(() => {
 		props.getNotes();
-	}, []);
+	}, [props]);
 
 	const { notes } = props.notes;
 	if (notes.length === 0) {

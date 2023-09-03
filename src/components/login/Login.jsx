@@ -2,16 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "../../utils/utils";
 import { Link } from "react-router-dom";
-import {
-	Container,
-	Button,
-	Row,
-	Col,
-	Form,
-	FormGroup,
-	Input,
-	Label,
-} from "reactstrap";
+import { Container, Button, FormGroup, Input, FormLabel } from "@mui/material";
 
 import { connect } from "react-redux";
 
@@ -32,44 +23,39 @@ const Login = (props) => {
 
 	return (
 		<Container>
-			<Row>
-				<Col md="4">
-					<h1>Login</h1>
-					<Form>
-						<FormGroup>
-							<Label>User name</Label>
-							<Input
-								type="text"
-								name="username"
-								placeholder="Enter user name"
-								value={username}
-								onChange={(e) => {
-									setUsername(e.target.value);
-								}}
-							/>
-						</FormGroup>
+			<h1>Login</h1>
 
-						<FormGroup>
-							<Label>Your password</Label>
-							<Input
-								type="password"
-								name="password"
-								placeholder="Enter password"
-								value={password}
-								onChange={(e) => {
-									setPassword(e.target.value);
-								}}
-							/>
-						</FormGroup>
-					</Form>
-					<Button color="primary" onClick={onLoginClick}>
-						Login
-					</Button>
-					<p className="mt-2">
-						Don't have an account? <Link to="/signup">Signup</Link>
-					</p>
-				</Col>
-			</Row>
+			<FormGroup>
+				<FormLabel>User name</FormLabel>
+				<Input
+					type="text"
+					name="username"
+					placeholder="Enter user name"
+					value={username}
+					onChange={(e) => {
+						setUsername(e.target.value);
+					}}
+				/>
+			</FormGroup>
+
+			<FormGroup>
+				<FormLabel>Your password</FormLabel>
+				<Input
+					type="password"
+					name="password"
+					placeholder="Enter password"
+					value={password}
+					onChange={(e) => {
+						setPassword(e.target.value);
+					}}
+				/>
+			</FormGroup>
+			<Button color="primary" onClick={onLoginClick}>
+				Login
+			</Button>
+			<p className="mt-2">
+				Don't have an account? <Link to="/signup">Signup</Link>
+			</p>
 		</Container>
 	);
 };

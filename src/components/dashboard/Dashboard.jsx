@@ -3,16 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "../../utils/utils";
 
-import {
-	Container,
-	Nav,
-	Navbar,
-	NavbarBrand,
-	NavbarToggler,
-	Collapse,
-	NavItem,
-	NavLink,
-} from "reactstrap";
+import { Container, AppBar, Typography, Toolbar, Button, Box} from "@mui/material";
 import { logout } from "../login/LoginActions";
 
 import NotesList from "../notes/NotesList";
@@ -32,19 +23,20 @@ const Dashboard = (props) => {
 
 	return (
 		<div>
-			<Navbar bg="light">
-				<NavbarBrand href="/">Home</NavbarBrand>
-				{/* <NavbarToggler onClick={toggleNavbar} /> */}
-				{/* <Collapse isOpen={!collapsed} navbar className="justify-content-end"> */}
-				<Nav className="d-flex align-items-center">
-					<NavItem>
-						User: <b>{user.username}</b>
-					</NavItem>
+			<AppBar bg="light">
+				<Toolbar>
 
-					<NavLink onClick={onLogout}>Logout</NavLink>
-				</Nav>
+				</Toolbar>
+				<Typography>Home</Typography>
+				<Box className="d-flex align-items-center">
+					<Box>
+						User: <b>{user.username}</b>
+					</Box>
+
+					<Button onClick={onLogout}>Logout</Button>
+				</Box>
 				{/* </Collapse> */}
-			</Navbar>
+			</AppBar>
 			<Container>
 				<NotesList />
                 <AddNote />

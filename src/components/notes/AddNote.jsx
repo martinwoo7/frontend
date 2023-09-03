@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "../../utils/utils";
-import { Button, Form, Input, FormGroup, Label } from "reactstrap";
+import { Button, Input, FormGroup, FormLabel } from "@mui/material";
 import { addNote } from "./NotesActions";
 
 const AddNote = (props) => {
@@ -22,19 +22,19 @@ const AddNote = (props) => {
 	return (
 		<div>
 			<h2>Add new note</h2>
-			<Form>
-				<FormGroup>
-					<Label>Note</Label>
-					<Input
-						type="textarea"
-						aria-rowspan={3}
-						name="content"
-						placeholder="Enter note"
-						value={content}
-						onChange={onChange}
-					/>
-				</FormGroup>
-			</Form>
+
+			<FormGroup>
+				<FormLabel>Note</FormLabel>
+				<Input
+					type="textarea"
+					aria-rowspan={3}
+					name="content"
+					placeholder="Enter note"
+					value={content}
+					onChange={onChange}
+				/>
+			</FormGroup>
+
 			<Button color="success" onClick={onAddClick}>
 				Add note
 			</Button>
